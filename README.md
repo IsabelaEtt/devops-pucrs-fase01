@@ -1,119 +1,60 @@
+![CI Pipeline](https://github.com/IsabelaEtt/devops-pucrs-fase01/actions/workflows/ci.yml/badge.svg)
+
 # Projeto DevOps Fase 1
-Este projeto foi desenvolvido como parte da disciplina de **DevOps**, com o objetivo de demonstrar na prática conceitos de **Integração Contínua (CI)**, **Infraestrutura como Código (IaC)** e **automação de pipelines** utilizando GitHub Actions.
 
-A aplicação é propositalmente simples — uma API em **Node.js** utilizando **Express**, que retorna uma mensagem `"hello world"`. O foco principal do projeto é a automação do ciclo de build, teste e provisionamento de infraestrutura.
+API simples desenvolvida para demonstrar práticas de DevOps, com foco em Integração Contínua (CI) e Infraestrutura como Código (IaC).
 
-## 🚀 Tecnologias
-- Node.js
-- Express.js
-- Jest (testes)
-- Supertest (testes de API)
-- GitHub Actions (CI/CD)
-- Terraform (Infraestrutura como Código)
-- AWS S3 (Armazenamento)
+## 💻 Sobre o Projeto
 
-## 📦 Instalação
+- API Node.js/Express que retorna mensagem "Hello World"
+- Pipeline de CI/CD com GitHub Actions
+- Infraestrutura AWS provisionada via Terraform
+- Testes automatizados com Jest e Supertest
+
+## 🚀 Início Rápido
+
 ```bash
+# Instalação
 npm install
-```
 
-## ▶️ Executar a API
-```bash
+# Executar API (http://localhost:3000)
 npm start
-```
 
-A API estará disponível em `http://localhost:3000`
-
-## 🧪 Executar os Testes
-```bash
+# Executar Testes
 npm test
-```
-
-Para executar os testes em modo watch:
-
-```bash
-npm run test:watch
 ```
 
 ## 📍 Endpoints
 
-### GET /
-Retorna uma mensagem "Hello World"
+| Endpoint | Método | Descrição | Resposta |
+|----------|---------|------------|-----------|
+| `/` | GET | Mensagem principal | `{ "message": "Hello World" }` |
+| `/health` | GET | Health check | `{ "status": "OK" }` |
 
-**Resposta:**
-```json
-{
-  "message": "Hello World"
-}
-```
+## ⚙️ CI/CD Pipeline
 
-### GET /health
-Endpoint de health check
+O pipeline (`.github/workflows/ci.yml`) é executado em pushes para `main` e pull requests, incluindo:
 
-**Resposta:**
-```json
-{
-  "status": "OK"
-}
-```
+1. **Build e Testes**
+   - Compatibilidade Node.js 18.x e 20.x
+   - Testes unitários e relatório de cobertura
 
-## 📊 Cobertura de Testes
+2. **Qualidade e Segurança**
+   - Verificação de estrutura do projeto
+   - Auditoria de segurança (npm audit)
 
-Os testes incluem:
-- Verificação do status HTTP 200
-- Validação do conteúdo da resposta
-- Verificação do Content-Type (JSON)
-- Health check endpoint
+## 🏗️ Infraestrutura
 
-Execute `npm test` para ver o relatório de cobertura.
+Recursos AWS provisionados via Terraform:
+- S3 Bucket com versionamento para artefatos
 
-## 🔄 Pipeline de CI/CD
+## 🛠️ Tecnologias
 
-O projeto utiliza **GitHub Actions** para automação do pipeline de CI. O workflow é executado automaticamente em:
-- Push para a branch `main`
-- **Todos os Pull Requests** (independentemente da branch)
-
-### Jobs do Pipeline
-
-#### 1. **Build e Testes** (`build-and-test`)
-- Executa em múltiplas versões do Node.js (18.x e 20.x)
-- Instala as dependências
-- Executa os testes unitários
-- Gera relatório de cobertura
-- Faz upload do relatório de cobertura como artefato
-
-#### 2. **Verificação de Qualidade** (`lint`)
-- Verifica a estrutura do projeto
-- Valida a presença de arquivos essenciais
-
-#### 3. **Auditoria de Segurança** (`security`)
-- Executa `npm audit` para identificar vulnerabilidades
-- Verifica dependências com problemas de segurança
-
-#### 4. **Status Final** (`build-status`)
-- Consolida o resultado de todos os jobs
-- Indica sucesso ou falha do pipeline
-
-### Badge de Status
-
-Após fazer push para o GitHub, você pode adicionar um badge de status ao README:
-
-```markdown
-![CI Pipeline](https://github.com/SEU_USUARIO/projeto-devops-fase-1/actions/workflows/ci.yml/badge.svg)
-```
-
-### Arquivo do Workflow
-
-O workflow está localizado em: `.github/workflows/ci.yml`
-
-## ☁️ Infraestrutura como Código (Terraform)
-
-O projeto utiliza **Terraform** para provisionar automaticamente recursos na AWS.
-
-### Recursos Provisionados
-
-- **S3 Bucket** para armazenar artefatos da aplicação
-  - Versionamento habilitado
+- **Backend:** Node.js, Express
+- **Testes:** Jest, Supertest
+- **CI/CD:** GitHub Actions
+- **IaC:** Terraform
+- **Cloud:** AWS (S3)
   - Criptografia AES256
   - Bloqueio de acesso público (segurança)
 
